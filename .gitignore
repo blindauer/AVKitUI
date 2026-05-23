@@ -1,0 +1,6 @@
+.build/
+.swiftpm-cache/
+.DS_Store
+.swiftpm/
+xcuserdata/
+*.xcuserstate
