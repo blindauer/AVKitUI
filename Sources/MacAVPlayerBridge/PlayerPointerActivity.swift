@@ -4,6 +4,7 @@ import CoreGraphics
 public enum PlayerPointerPhase: Sendable {
     case moved
     case entered
+    case exited
     case modifiersChanged
 }
 

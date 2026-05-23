@@ -234,6 +234,8 @@ private struct DemoRootView: View {
             phase = "moved"
         case .entered:
             phase = "entered"
+        case .exited:
+            phase = "exited"
         case .modifiersChanged:
             phase = "modifiersChanged"
         }

@@ -114,6 +114,11 @@ final class BridgeAVPlayerView: AVPlayerView {
         notifyPointerActivity(with: event, phase: .entered)
     }
 
+    override func mouseExited(with event: NSEvent) {
+        super.mouseExited(with: event)
+        notifyPointerActivity(with: event, phase: .exited)
+    }
+
     override func flagsChanged(with event: NSEvent) {
         super.flagsChanged(with: event)
         notifyPointerActivity(with: event, phase: .modifiersChanged)
