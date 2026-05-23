@@ -1,11 +1,11 @@
 import AVKit
 import Testing
-@testable import MacAVPlayerBridge
+@testable import AVKitUI
 
 @MainActor
 @Test
 func defaultModifierValuesMatchPackageIntent() {
-    let view = MacAVPlayerView(player: AVPlayer())
+    let view = PlayerView(player: AVPlayer())
 
     #expect(view.controlsStyle == .floating)
     #expect(view.videoGravity == .resizeAspect)
@@ -19,7 +19,7 @@ func defaultModifierValuesMatchPackageIntent() {
 @MainActor
 @Test
 func modifiersOverrideDefaults() {
-    let view = MacAVPlayerView(player: AVPlayer())
+    let view = PlayerView(player: AVPlayer())
         .controlsStyle(.inline)
         .videoGravity(.resizeAspectFill)
         .showsFullScreenToggleButton(false)
@@ -69,8 +69,8 @@ func customViewMenuItemsCanBeConstructed() {
 
 @MainActor
 @Test
-func macAVPlayerViewInitializerDoesNotRequireReadinessBinding() {
+func playerViewInitializerDoesNotRequireReadinessBinding() {
     let player = AVPlayer()
-    _ = MacAVPlayerView(player: player)
+    _ = PlayerView(player: player)
     #expect(Bool(true))
 }

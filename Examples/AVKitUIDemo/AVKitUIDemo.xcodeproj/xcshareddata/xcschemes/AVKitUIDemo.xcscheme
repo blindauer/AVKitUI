@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B100000C2F60000100AAA001"
-               BuildableName = "MacAVPlayerBridgeDemo.app"
-               BlueprintName = "MacAVPlayerBridgeDemo"
-               ReferencedContainer = "container:MacAVPlayerBridgeDemo.xcodeproj">
+               BuildableName = "AVKitUIDemo.app"
+               BlueprintName = "AVKitUIDemo"
+               ReferencedContainer = "container:AVKitUIDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B100000C2F60000100AAA001"
-            BuildableName = "MacAVPlayerBridgeDemo.app"
-            BlueprintName = "MacAVPlayerBridgeDemo"
-            ReferencedContainer = "container:MacAVPlayerBridgeDemo.xcodeproj">
+            BuildableName = "AVKitUIDemo.app"
+            BlueprintName = "AVKitUIDemo"
+            ReferencedContainer = "container:AVKitUIDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -63,9 +63,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B100000C2F60000100AAA001"
-            BuildableName = "MacAVPlayerBridgeDemo.app"
-            BlueprintName = "MacAVPlayerBridgeDemo"
-            ReferencedContainer = "container:MacAVPlayerBridgeDemo.xcodeproj">
+            BuildableName = "AVKitUIDemo.app"
+            BlueprintName = "AVKitUIDemo"
+            ReferencedContainer = "container:AVKitUIDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

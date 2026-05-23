@@ -2,7 +2,7 @@ import SwiftUI
 import AVKit
 import AppKit
 
-public struct MacAVPlayerView: NSViewRepresentable {
+public struct PlayerView: NSViewRepresentable {
     public let player: AVPlayer
 
     var controlsStyle: AVPlayerViewControlsStyle = .floating
@@ -20,17 +20,17 @@ public struct MacAVPlayerView: NSViewRepresentable {
     }
 
     public func makeNSView(context: Context) -> AVPlayerView {
-        let view = BridgeAVPlayerView()
+        let view = PlayerNSView()
         configure(view, context: context)
         return view
     }
 
     public func updateNSView(_ nsView: AVPlayerView, context: Context) {
-        guard let view = nsView as? BridgeAVPlayerView else { return }
+        guard let view = nsView as? PlayerNSView else { return }
         configure(view, context: context)
     }
 
-    private func configure(_ view: BridgeAVPlayerView, context: Context) {
+    private func configure(_ view: PlayerNSView, context: Context) {
         view.player = player
         view.controlsStyle = controlsStyle
         view.videoGravity = videoGravity
@@ -48,7 +48,7 @@ public struct MacAVPlayerView: NSViewRepresentable {
 
 // MARK: - Modifiers
 
-public extension MacAVPlayerView {
+public extension PlayerView {
     func controlsStyle(_ style: AVPlayerViewControlsStyle) -> Self {
         var copy = self
         copy.controlsStyle = style
@@ -104,7 +104,7 @@ public extension MacAVPlayerView {
     }
 }
 
-final class BridgeAVPlayerView: AVPlayerView {
+final class PlayerNSView: AVPlayerView {
     var menuItems: [ContextMenuItem] = []
     var onPointerActivity: (@MainActor @Sendable (PlayerPointerActivity) -> Void)?
 

@@ -3,23 +3,23 @@
 import PackageDescription
 
 let package = Package(
-    name: "MacAVPlayerBridge",
+    name: "AVKitUI",
     platforms: [
         .macOS(.v13)
     ],
     products: [
         .library(
-            name: "MacAVPlayerBridge",
-            targets: ["MacAVPlayerBridge"]
+            name: "AVKitUI",
+            targets: ["AVKitUI"]
         )
     ],
     targets: [
         .target(
-            name: "MacAVPlayerBridge"
+            name: "AVKitUI"
         ),
         .testTarget(
-            name: "MacAVPlayerBridgeTests",
-            dependencies: ["MacAVPlayerBridge"]
+            name: "AVKitUITests",
+            dependencies: ["AVKitUI"]
         )
     ]
 )

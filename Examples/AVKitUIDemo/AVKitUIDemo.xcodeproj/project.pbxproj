@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B10000112F60000100AAA001 /* MacAVPlayerBridgeDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000102F60000100AAA001 /* MacAVPlayerBridgeDemoApp.swift */; };
-		B100001E2F60000100AAA001 /* MacAVPlayerBridge in Frameworks */ = {isa = PBXBuildFile; productRef = B100001D2F60000100AAA001 /* MacAVPlayerBridge */; };
+		B10000112F60000100AAA001 /* AVKitUIDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000102F60000100AAA001 /* AVKitUIDemoApp.swift */; };
+		B100001E2F60000100AAA001 /* AVKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = B100001D2F60000100AAA001 /* AVKitUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B100000E2F60000100AAA001 /* MacAVPlayerBridgeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacAVPlayerBridgeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B10000102F60000100AAA001 /* MacAVPlayerBridgeDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacAVPlayerBridgeDemoApp.swift; sourceTree = "<group>"; };
+		B100000E2F60000100AAA001 /* AVKitUIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AVKitUIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10000102F60000100AAA001 /* AVKitUIDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVKitUIDemoApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,7 +21,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B100001E2F60000100AAA001 /* MacAVPlayerBridge in Frameworks */,
+				B100001E2F60000100AAA001 /* AVKitUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -31,7 +31,7 @@
 		B10000042F60000100AAA001 = {
 			isa = PBXGroup;
 			children = (
-				B100000F2F60000100AAA001 /* MacAVPlayerBridgeDemo */,
+				B100000F2F60000100AAA001 /* AVKitUIDemo */,
 				B100000D2F60000100AAA001 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -39,25 +39,25 @@
 		B100000D2F60000100AAA001 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B100000E2F60000100AAA001 /* MacAVPlayerBridgeDemo.app */,
+				B100000E2F60000100AAA001 /* AVKitUIDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B100000F2F60000100AAA001 /* MacAVPlayerBridgeDemo */ = {
+		B100000F2F60000100AAA001 /* AVKitUIDemo */ = {
 			isa = PBXGroup;
 			children = (
-				B10000102F60000100AAA001 /* MacAVPlayerBridgeDemoApp.swift */,
+				B10000102F60000100AAA001 /* AVKitUIDemoApp.swift */,
 			);
-			path = MacAVPlayerBridgeDemo;
+			path = AVKitUIDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B100000C2F60000100AAA001 /* MacAVPlayerBridgeDemo */ = {
+		B100000C2F60000100AAA001 /* AVKitUIDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B10000192F60000100AAA001 /* Build configuration list for PBXNativeTarget "MacAVPlayerBridgeDemo" */;
+			buildConfigurationList = B10000192F60000100AAA001 /* Build configuration list for PBXNativeTarget "AVKitUIDemo" */;
 			buildPhases = (
 				B100000A2F60000100AAA001 /* Sources */,
 				B100000B2F60000100AAA001 /* Frameworks */,
@@ -68,14 +68,14 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				B100000F2F60000100AAA001 /* MacAVPlayerBridgeDemo */,
+				B100000F2F60000100AAA001 /* AVKitUIDemo */,
 			);
-			name = MacAVPlayerBridgeDemo;
+			name = AVKitUIDemo;
 			packageProductDependencies = (
-				B100001D2F60000100AAA001 /* MacAVPlayerBridge */,
+				B100001D2F60000100AAA001 /* AVKitUI */,
 			);
-			productName = MacAVPlayerBridgeDemo;
-			productReference = B100000E2F60000100AAA001 /* MacAVPlayerBridgeDemo.app */;
+			productName = AVKitUIDemo;
+			productReference = B100000E2F60000100AAA001 /* AVKitUIDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -93,7 +93,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B10000082F60000100AAA001 /* Build configuration list for PBXProject "MacAVPlayerBridgeDemo" */;
+			buildConfigurationList = B10000082F60000100AAA001 /* Build configuration list for PBXProject "AVKitUIDemo" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -110,7 +110,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B100000C2F60000100AAA001 /* MacAVPlayerBridgeDemo */,
+				B100000C2F60000100AAA001 /* AVKitUIDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -130,7 +130,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B10000112F60000100AAA001 /* MacAVPlayerBridgeDemoApp.swift in Sources */,
+				B10000112F60000100AAA001 /* AVKitUIDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +150,7 @@
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = MacAVPlayerBridgeDemo;
+				INFOPLIST_KEY_CFBundleDisplayName = AVKitUIDemo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -159,7 +159,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.blindauer.MacAVPlayerBridgeDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blindauer.AVKitUIDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -181,7 +181,7 @@
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = MacAVPlayerBridgeDemo;
+				INFOPLIST_KEY_CFBundleDisplayName = AVKitUIDemo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -190,7 +190,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.blindauer.MacAVPlayerBridgeDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blindauer.AVKitUIDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -203,7 +203,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B10000082F60000100AAA001 /* Build configuration list for PBXProject "MacAVPlayerBridgeDemo" */ = {
+		B10000082F60000100AAA001 /* Build configuration list for PBXProject "AVKitUIDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B10000092F60000100AAA001 /* Debug */,
@@ -212,7 +212,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B10000192F60000100AAA001 /* Build configuration list for PBXNativeTarget "MacAVPlayerBridgeDemo" */ = {
+		B10000192F60000100AAA001 /* Build configuration list for PBXNativeTarget "AVKitUIDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B10000092F60000100AAA001 /* Debug */,
@@ -231,10 +231,10 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B100001D2F60000100AAA001 /* MacAVPlayerBridge */ = {
+		B100001D2F60000100AAA001 /* AVKitUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B100001B2F60000100AAA001 /* XCLocalSwiftPackageReference "../.." */;
-			productName = MacAVPlayerBridge;
+			productName = AVKitUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

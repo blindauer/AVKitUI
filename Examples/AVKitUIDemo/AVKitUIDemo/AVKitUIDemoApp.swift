@@ -1,12 +1,12 @@
 import SwiftUI
 import AVKit
 import AppKit
-import MacAVPlayerBridge
+import AVKitUI
 
 @main
-struct MacAVPlayerBridgeDemoApp: App {
+struct AVKitUIDemoApp: App {
     var body: some Scene {
-        WindowGroup("MacAVPlayerBridge Demo") {
+        WindowGroup("AVKitUI Demo") {
             DemoRootView()
                 .frame(minWidth: 960, minHeight: 620)
         }
@@ -83,7 +83,7 @@ private struct DemoRootView: View {
             RoundedRectangle(cornerRadius: 18)
                 .fill(Color.black.opacity(0.92))
 
-            MacAVPlayerView(player: player)
+            PlayerView(player: player)
                 .controlsStyle(controlsStyle)
                 .contextMenuItems(contextMenuItems)
                 .onPointerActivity { activity in

@@ -1,6 +1,6 @@
-# MacAVPlayerBridge
+# AVKitUI
 
-`MacAVPlayerBridge` gives SwiftUI apps a focused, reusable bridge to macOS `AVPlayerView`.
+`AVKitUI` gives SwiftUI apps a focused, reusable bridge to macOS `AVPlayerView`.
 
 SwiftUI's built-in video APIs are convenient, but they do not expose much of the interaction surface that makes `AVPlayerView` useful in desktop apps. This package keeps a SwiftUI-first API while preserving AppKit features that matter in real macOS software:
 
@@ -22,14 +22,14 @@ This package was extracted from techniques developed in Mosaic, a macOS video br
 Add the package to your Xcode project via **File → Add Package Dependencies… → Add Local…**, or declare it in `Package.swift` using a path relative to your consuming package:
 
 ```swift
-.package(path: "../MacAVPlayerBridge")
+.package(path: "../AVKitUI")
 ```
 
 ## Demo App
 
-The repo includes a small macOS sample app project at `Examples/MacAVPlayerBridgeDemo`.
+The repo includes a small macOS sample app project at `Examples/AVKitUIDemo`.
 
-Open `Examples/MacAVPlayerBridgeDemo/MacAVPlayerBridgeDemo.xcodeproj` in Xcode and run the `MacAVPlayerBridgeDemo` scheme.
+Open `Examples/AVKitUIDemo/AVKitUIDemo.xcodeproj` in Xcode and run the `AVKitUIDemo` scheme.
 
 The sample app lets you:
 
@@ -43,13 +43,13 @@ The sample app lets you:
 ```swift
 import SwiftUI
 import AVKit
-import MacAVPlayerBridge
+import AVKitUI
 
 struct PlayerSurface: View {
     let player: AVPlayer
 
     var body: some View {
-        MacAVPlayerView(player: player)
+        PlayerView(player: player)
             .controlsStyle(.floating)
             .videoGravity(.resizeAspect)
             .contextMenuItems([
@@ -75,17 +75,17 @@ struct PlayerSurface: View {
 }
 ```
 
-Every modifier has a sensible default, so a minimal call site is just `MacAVPlayerView(player: player)`. Chain only the modifiers you need to override.
+Every modifier has a sensible default, so a minimal call site is just `PlayerView(player: player)`. Chain only the modifiers you need to override.
 
 ## API Overview
 
-`MacAVPlayerView`
+`PlayerView`
 
 - wraps `AVPlayerView` in SwiftUI
 - forwards pointer activity to SwiftUI
 - supports native AppKit context menus
 
-Modifiers on `MacAVPlayerView`:
+Modifiers on `PlayerView`:
 
 - `.controlsStyle(_:)` — playback control style (default `.floating`)
 - `.videoGravity(_:)` — layer gravity (default `.resizeAspect`)
