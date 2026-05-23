@@ -83,23 +83,13 @@ private struct DemoRootView: View {
             RoundedRectangle(cornerRadius: 18)
                 .fill(Color.black.opacity(0.92))
 
-            MacAVPlayerView(
-                player: player,
-                configuration: .init(
-                    controlsStyle: controlsStyle,
-                    videoGravity: .resizeAspect,
-                    showsFullScreenToggleButton: true,
-                    showsFrameSteppingButtons: true,
-                    showsSharingServiceButton: true,
-                    updatesNowPlayingInfoCenter: false,
-                    allowsVideoFrameAnalysis: false
-                ),
-                menuItems: contextMenuItems,
-                onPointerActivity: { activity in
+            MacAVPlayerView(player: player)
+                .controlsStyle(controlsStyle)
+                .contextMenuItems(contextMenuItems)
+                .onPointerActivity { activity in
                     pointerSummary = pointerSummary(for: activity)
                 }
-            )
-            .clipShape(RoundedRectangle(cornerRadius: 18))
+                .clipShape(RoundedRectangle(cornerRadius: 18))
 
             if itemStatus != .readyToPlay {
                 RoundedRectangle(cornerRadius: 18)

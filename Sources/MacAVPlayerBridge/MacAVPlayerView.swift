@@ -2,50 +2,21 @@ import SwiftUI
 import AVKit
 import AppKit
 
-public struct MacAVPlayerConfiguration {
-    public var controlsStyle: AVPlayerViewControlsStyle
-    public var videoGravity: AVLayerVideoGravity
-    public var showsFullScreenToggleButton: Bool
-    public var showsFrameSteppingButtons: Bool
-    public var showsSharingServiceButton: Bool
-    public var updatesNowPlayingInfoCenter: Bool
-    public var allowsVideoFrameAnalysis: Bool
-
-    public init(
-        controlsStyle: AVPlayerViewControlsStyle = .floating,
-        videoGravity: AVLayerVideoGravity = .resizeAspect,
-        showsFullScreenToggleButton: Bool = true,
-        showsFrameSteppingButtons: Bool = true,
-        showsSharingServiceButton: Bool = true,
-        updatesNowPlayingInfoCenter: Bool = false,
-        allowsVideoFrameAnalysis: Bool = false
-    ) {
-        self.controlsStyle = controlsStyle
-        self.videoGravity = videoGravity
-        self.showsFullScreenToggleButton = showsFullScreenToggleButton
-        self.showsFrameSteppingButtons = showsFrameSteppingButtons
-        self.showsSharingServiceButton = showsSharingServiceButton
-        self.updatesNowPlayingInfoCenter = updatesNowPlayingInfoCenter
-        self.allowsVideoFrameAnalysis = allowsVideoFrameAnalysis
-    }
-}
-
 public struct MacAVPlayerView: NSViewRepresentable {
     public let player: AVPlayer
-    public let configuration: MacAVPlayerConfiguration
-    public let menuItems: [ContextMenuItem]
-    public let onPointerActivity: (@MainActor @Sendable (PlayerPointerActivity) -> Void)?
 
-    public init(
-        player: AVPlayer,
-        configuration: MacAVPlayerConfiguration = .init(),
-        menuItems: [ContextMenuItem] = [],
-        onPointerActivity: (@MainActor @Sendable (PlayerPointerActivity) -> Void)? = nil
-    ) {
+    var controlsStyle: AVPlayerViewControlsStyle = .floating
+    var videoGravity: AVLayerVideoGravity = .resizeAspect
+    var showsFullScreenToggleButton: Bool = true
+    var showsFrameSteppingButtons: Bool = true
+    var showsSharingServiceButton: Bool = true
+    var updatesNowPlayingInfoCenter: Bool = false
+    var allowsVideoFrameAnalysis: Bool = false
+    var contextMenuItems: [ContextMenuItem] = []
+    var onPointerActivity: (@MainActor @Sendable (PlayerPointerActivity) -> Void)?
+
+    public init(player: AVPlayer) {
         self.player = player
-        self.configuration = configuration
-        self.menuItems = menuItems
-        self.onPointerActivity = onPointerActivity
     }
 
     public func makeNSView(context: Context) -> AVPlayerView {
@@ -61,17 +32,75 @@ public struct MacAVPlayerView: NSViewRepresentable {
 
     private func configure(_ view: BridgeAVPlayerView, context: Context) {
         view.player = player
-        view.controlsStyle = configuration.controlsStyle
-        view.videoGravity = configuration.videoGravity
-        view.menuItems = menuItems
+        view.controlsStyle = controlsStyle
+        view.videoGravity = videoGravity
+        view.menuItems = contextMenuItems
         view.onPointerActivity = onPointerActivity
-        view.showsFullScreenToggleButton = configuration.showsFullScreenToggleButton
-        view.showsFrameSteppingButtons = configuration.showsFrameSteppingButtons
-        view.showsSharingServiceButton = configuration.showsSharingServiceButton
-        view.updatesNowPlayingInfoCenter = configuration.updatesNowPlayingInfoCenter
+        view.showsFullScreenToggleButton = showsFullScreenToggleButton
+        view.showsFrameSteppingButtons = showsFrameSteppingButtons
+        view.showsSharingServiceButton = showsSharingServiceButton
+        view.updatesNowPlayingInfoCenter = updatesNowPlayingInfoCenter
         if #available(macOS 13.0, *) {
-            view.allowsVideoFrameAnalysis = configuration.allowsVideoFrameAnalysis
+            view.allowsVideoFrameAnalysis = allowsVideoFrameAnalysis
         }
+    }
+}
+
+// MARK: - Modifiers
+
+public extension MacAVPlayerView {
+    func controlsStyle(_ style: AVPlayerViewControlsStyle) -> Self {
+        var copy = self
+        copy.controlsStyle = style
+        return copy
+    }
+
+    func videoGravity(_ gravity: AVLayerVideoGravity) -> Self {
+        var copy = self
+        copy.videoGravity = gravity
+        return copy
+    }
+
+    func showsFullScreenToggleButton(_ shows: Bool) -> Self {
+        var copy = self
+        copy.showsFullScreenToggleButton = shows
+        return copy
+    }
+
+    func showsFrameSteppingButtons(_ shows: Bool) -> Self {
+        var copy = self
+        copy.showsFrameSteppingButtons = shows
+        return copy
+    }
+
+    func showsSharingServiceButton(_ shows: Bool) -> Self {
+        var copy = self
+        copy.showsSharingServiceButton = shows
+        return copy
+    }
+
+    func updatesNowPlayingInfoCenter(_ updates: Bool) -> Self {
+        var copy = self
+        copy.updatesNowPlayingInfoCenter = updates
+        return copy
+    }
+
+    func allowsVideoFrameAnalysis(_ allows: Bool) -> Self {
+        var copy = self
+        copy.allowsVideoFrameAnalysis = allows
+        return copy
+    }
+
+    func contextMenuItems(_ items: [ContextMenuItem]) -> Self {
+        var copy = self
+        copy.contextMenuItems = items
+        return copy
+    }
+
+    func onPointerActivity(_ handler: @escaping @MainActor @Sendable (PlayerPointerActivity) -> Void) -> Self {
+        var copy = self
+        copy.onPointerActivity = handler
+        return copy
     }
 }
 

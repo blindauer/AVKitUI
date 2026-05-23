@@ -2,17 +2,35 @@ import AVKit
 import Testing
 @testable import MacAVPlayerBridge
 
+@MainActor
 @Test
-func defaultConfigurationMatchesPackageIntent() {
-    let configuration = MacAVPlayerConfiguration()
+func defaultModifierValuesMatchPackageIntent() {
+    let view = MacAVPlayerView(player: AVPlayer())
 
-    #expect(configuration.controlsStyle == .floating)
-    #expect(configuration.videoGravity == .resizeAspect)
-    #expect(configuration.showsFullScreenToggleButton)
-    #expect(configuration.showsFrameSteppingButtons)
-    #expect(configuration.showsSharingServiceButton)
-    #expect(configuration.updatesNowPlayingInfoCenter == false)
-    #expect(configuration.allowsVideoFrameAnalysis == false)
+    #expect(view.controlsStyle == .floating)
+    #expect(view.videoGravity == .resizeAspect)
+    #expect(view.showsFullScreenToggleButton)
+    #expect(view.showsFrameSteppingButtons)
+    #expect(view.showsSharingServiceButton)
+    #expect(view.updatesNowPlayingInfoCenter == false)
+    #expect(view.allowsVideoFrameAnalysis == false)
+}
+
+@MainActor
+@Test
+func modifiersOverrideDefaults() {
+    let view = MacAVPlayerView(player: AVPlayer())
+        .controlsStyle(.inline)
+        .videoGravity(.resizeAspectFill)
+        .showsFullScreenToggleButton(false)
+        .updatesNowPlayingInfoCenter(true)
+
+    #expect(view.controlsStyle == .inline)
+    #expect(view.videoGravity == .resizeAspectFill)
+    #expect(view.showsFullScreenToggleButton == false)
+    #expect(view.updatesNowPlayingInfoCenter)
+    // Unchanged values keep their defaults.
+    #expect(view.showsFrameSteppingButtons)
 }
 
 @Test

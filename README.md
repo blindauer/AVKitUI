@@ -49,16 +49,10 @@ struct PlayerSurface: View {
     let player: AVPlayer
 
     var body: some View {
-        MacAVPlayerView(
-            player: player,
-            configuration: .init(
-                controlsStyle: .floating,
-                videoGravity: .resizeAspect,
-                showsFullScreenToggleButton: true,
-                showsFrameSteppingButtons: true,
-                showsSharingServiceButton: true
-            ),
-            menuItems: [
+        MacAVPlayerView(player: player)
+            .controlsStyle(.floating)
+            .videoGravity(.resizeAspect)
+            .contextMenuItems([
                 .item(title: "Pause") {
                     player.pause()
                 },
@@ -71,16 +65,17 @@ struct PlayerSurface: View {
                     button.action = #selector(ClosureSleeve.invoke)
                     return button
                 })
-            ],
-            onPointerActivity: { activity in
+            ])
+            .onPointerActivity { activity in
                 if activity.modifiers.contains(.command) {
                     print("Pointer moved at \(activity.location)")
                 }
             }
-        )
     }
 }
 ```
+
+Every modifier has a sensible default, so a minimal call site is just `MacAVPlayerView(player: player)`. Chain only the modifiers you need to override.
 
 ## API Overview
 
@@ -90,15 +85,17 @@ struct PlayerSurface: View {
 - forwards pointer activity to SwiftUI
 - supports native AppKit context menus
 
-`MacAVPlayerConfiguration`
+Modifiers on `MacAVPlayerView`:
 
-- control style
-- video gravity
-- fullscreen toggle button visibility
-- frame stepping controls
-- sharing button visibility
-- now-playing center behavior
-- video frame analysis toggle
+- `.controlsStyle(_:)` — playback control style (default `.floating`)
+- `.videoGravity(_:)` — layer gravity (default `.resizeAspect`)
+- `.showsFullScreenToggleButton(_:)` — default `true`
+- `.showsFrameSteppingButtons(_:)` — default `true`
+- `.showsSharingServiceButton(_:)` — default `true`
+- `.updatesNowPlayingInfoCenter(_:)` — default `false`
+- `.allowsVideoFrameAnalysis(_:)` — default `false`
+- `.contextMenuItems(_:)` — items shown in the AppKit context menu
+- `.onPointerActivity(_:)` — closure invoked on pointer activity inside the player
 
 `ContextMenuItem`
 
