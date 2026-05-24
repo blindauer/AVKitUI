@@ -1,3 +1,10 @@
+//
+//  PlayerView.swift
+//  AVKitUI
+//
+//  Created by Bradley Lindauer on 5/23/26.
+//
+
 import SwiftUI
 import AVKit
 import AppKit
@@ -21,16 +28,16 @@ public struct PlayerView: NSViewRepresentable {
 
     public func makeNSView(context: Context) -> AVPlayerView {
         let view = PlayerNSView()
-        configure(view, context: context)
+        apply(to: view)
         return view
     }
 
     public func updateNSView(_ nsView: AVPlayerView, context: Context) {
         guard let view = nsView as? PlayerNSView else { return }
-        configure(view, context: context)
+        apply(to: view)
     }
 
-    private func configure(_ view: PlayerNSView, context: Context) {
+    func apply(to view: PlayerNSView) {
         view.player = player
         view.controlsStyle = controlsStyle
         view.videoGravity = videoGravity
@@ -157,7 +164,7 @@ final class PlayerNSView: AVPlayerView {
         buildMenu()
     }
 
-    private func notifyPointerActivity(with event: NSEvent, phase: PlayerPointerPhase) {
+    func notifyPointerActivity(with event: NSEvent, phase: PlayerPointerPhase) {
         let location = convert(event.locationInWindow, from: nil)
         onPointerActivity?(
             PlayerPointerActivity(
@@ -168,7 +175,7 @@ final class PlayerNSView: AVPlayerView {
         )
     }
 
-    private func buildMenu() -> NSMenu? {
+    func buildMenu() -> NSMenu? {
         guard !menuItems.isEmpty else { return nil }
 
         let menu = NSMenu()

@@ -1,3 +1,10 @@
+//
+//  PlayerPointerActivity.swift
+//  AVKitUI
+//
+//  Created by Bradley Lindauer on 5/23/26.
+//
+
 import AppKit
 import CoreGraphics
 

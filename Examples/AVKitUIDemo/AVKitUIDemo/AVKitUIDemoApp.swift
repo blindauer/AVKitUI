@@ -1,3 +1,10 @@
+//
+//  AVKitUIDemoApp.swift
+//  AVKitUIDemo
+//
+//  Created by Bradley Lindauer on 5/23/26.
+//
+
 import SwiftUI
 import AVKit
 import AppKit
@@ -38,9 +45,9 @@ private struct DemoRootView: View {
     private var header: some View {
         HStack(alignment: .top, spacing: 20) {
             VStack(alignment: .leading, spacing: 8) {
-                Text("MacAVPlayerBridge Demo")
+                Text("AVKitUI Demo")
                     .font(.system(size: 28, weight: .semibold))
-                Text("A minimal macOS SwiftUI app using AVPlayerView through the package.")
+                Text("A minimal macOS SwiftUI app using AVKitUI.PlayerView.")
                     .foregroundStyle(.secondary)
                 if let selectedURL {
                     Text(selectedURL.lastPathComponent)
