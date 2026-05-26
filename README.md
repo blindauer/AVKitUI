@@ -19,7 +19,13 @@ This package was extracted from techniques developed in Mosaic, a macOS video br
 
 ## Installation
 
-Add the package to your Xcode project via **File → Add Package Dependencies… → Add Local…**, or declare it in `Package.swift` using a path relative to your consuming package:
+Add the package to your Xcode project via **File → Add Package Dependencies…** and paste the repository URL, or declare it in `Package.swift`:
+
+```swift
+.package(url: "https://github.com/blindauer/AVKitUI.git", from: "0.1.0")
+```
+
+If you're developing the package alongside a consuming app, you can point Xcode at a local checkout via **Add Local…**, or in `Package.swift`:
 
 ```swift
 .package(path: "../AVKitUI")
