@@ -5,6 +5,8 @@
 //  Created by Bradley Lindauer on 5/23/26.
 //
 
+#if os(macOS)
+
 import AppKit
 import CoreGraphics
 
@@ -13,6 +15,7 @@ public enum PlayerPointerPhase: Sendable {
     case entered
     case exited
     case modifiersChanged
+    case clicked
 }
 
 public struct PlayerPointerActivity: Sendable {
@@ -26,3 +29,5 @@ public struct PlayerPointerActivity: Sendable {
         self.phase = phase
     }
 }
+
+#endif

@@ -7,6 +7,8 @@
 
 import SwiftUI
 import AVKit
+
+#if os(macOS)
 import AppKit
 
 public struct PlayerView: NSViewRepresentable {
@@ -21,6 +23,7 @@ public struct PlayerView: NSViewRepresentable {
     var allowsVideoFrameAnalysis: Bool = false
     var contextMenuItems: [ContextMenuItem] = []
     var onPointerActivity: (@MainActor @Sendable (PlayerPointerActivity) -> Void)?
+    var onPrimaryClick: (@MainActor @Sendable (PlayerPointerActivity) -> Void)?
 
     public init(player: AVPlayer) {
         self.player = player
@@ -43,6 +46,7 @@ public struct PlayerView: NSViewRepresentable {
         view.videoGravity = videoGravity
         view.menuItems = contextMenuItems
         view.onPointerActivity = onPointerActivity
+        view.onPrimaryClick = onPrimaryClick
         view.showsFullScreenToggleButton = showsFullScreenToggleButton
         view.showsFrameSteppingButtons = showsFrameSteppingButtons
         view.showsSharingServiceButton = showsSharingServiceButton
@@ -109,14 +113,35 @@ public extension PlayerView {
         copy.onPointerActivity = handler
         return copy
     }
+
+    /// Fires for single clicks on the video surface. Clicks on the playback controls
+    /// (the floating bar, its buttons and sliders) are filtered out by hit-testing
+    /// and behave normally.
+    func onPrimaryClick(_ handler: @escaping @MainActor @Sendable (PlayerPointerActivity) -> Void) -> Self {
+        var copy = self
+        copy.onPrimaryClick = handler
+        return copy
+    }
 }
 
-final class PlayerNSView: AVPlayerView {
+final class PlayerNSView: AVPlayerView, NSGestureRecognizerDelegate {
     var menuItems: [ContextMenuItem] = []
     var onPointerActivity: (@MainActor @Sendable (PlayerPointerActivity) -> Void)?
+    var onPrimaryClick: (@MainActor @Sendable (PlayerPointerActivity) -> Void)?
+
+    private var clickRecognizer: NSClickGestureRecognizer?
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
+
+        // AVPlayerView's internal content view consumes mouseDown, so a plain
+        // override never sees clicks. A gesture recognizer observes events routed
+        // to descendants; the delegate filters out clicks on the controls.
+        let click = NSClickGestureRecognizer(target: self, action: #selector(handlePrimaryClick(_:)))
+        click.numberOfClicksRequired = 1
+        click.delegate = self
+        addGestureRecognizer(click)
+        clickRecognizer = click
     }
 
     required init?(coder: NSCoder) {
@@ -158,6 +183,56 @@ final class PlayerNSView: AVPlayerView {
     override func flagsChanged(with event: NSEvent) {
         super.flagsChanged(with: event)
         notifyPointerActivity(with: event, phase: .modifiersChanged)
+    }
+
+    func gestureRecognizer(_ gestureRecognizer: NSGestureRecognizer, shouldAttemptToRecognizeWith event: NSEvent) -> Bool {
+        guard gestureRecognizer === clickRecognizer else { return true }
+        guard onPrimaryClick != nil else { return false }
+        return clickLandsOnVideoSurface(event)
+    }
+
+    @objc
+    private func handlePrimaryClick(_ recognizer: NSClickGestureRecognizer) {
+        guard recognizer.state == .ended else { return }
+        onPrimaryClick?(
+            PlayerPointerActivity(
+                location: recognizer.location(in: self),
+                modifiers: NSApp.currentEvent?.modifierFlags ?? [],
+                phase: .clicked
+            )
+        )
+    }
+
+    /// True when the click hits the bare video surface rather than the playback
+    /// controls, so control clicks keep their normal behavior.
+    private func clickLandsOnVideoSurface(_ event: NSEvent) -> Bool {
+        guard let superview else { return false }
+        let hit = hitTest(superview.convert(event.locationInWindow, from: nil))
+        var view = hit
+        while let current = view, current !== self {
+            if isControlsChrome(current) { return false }
+            view = current.superview
+        }
+        // nil means the hit view wasn't inside our hierarchy at all.
+        return view === self
+    }
+
+    /// Identifies the playback controls and their chrome. The buttons and scrubber
+    /// are NSControls; AVKit's container class names mention "control"; and the
+    /// floating bar itself is an AVMovableView whose background is glass/effect
+    /// views, so those are matched by name. (Observed bar-background hit chain:
+    /// NSView -> NSGlassEffectView ContentHolder -> NSGlassView ->
+    /// NSGlassContainerView -> AVMovableView -> AVEventPassthroughView -> ...)
+    private func isControlsChrome(_ view: NSView) -> Bool {
+        if view is NSControl { return true }
+        if view is NSVisualEffectView { return true }
+        let name = view.className.lowercased()
+        return name.contains("control")
+            || name.contains("chrome")
+            || name.contains("backdrop")
+            || name.contains("glass")
+            || name.contains("visualeffect")
+            || name.contains("movable")
     }
 
     override func menu(for event: NSEvent) -> NSMenu? {
@@ -217,3 +292,5 @@ private final class MenuActionBox: NSObject {
         self.action = action
     }
 }
+
+#endif

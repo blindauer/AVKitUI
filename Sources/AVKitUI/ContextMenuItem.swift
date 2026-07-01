@@ -5,6 +5,8 @@
 //  Created by Bradley Lindauer on 5/23/26.
 //
 
+#if os(macOS)
+
 import AppKit
 
 public protocol PlayerContextMenuControlling {
@@ -37,3 +39,5 @@ struct MenuController: PlayerContextMenuControlling {
         menu.cancelTracking()
     }
 }
+
+#endif
