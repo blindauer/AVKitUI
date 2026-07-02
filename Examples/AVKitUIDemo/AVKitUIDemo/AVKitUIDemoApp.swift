@@ -235,6 +235,8 @@ private struct DemoRootView: View {
             phase = "exited"
         case .modifiersChanged:
             phase = "modifiersChanged"
+        case .clicked:
+            phase = "clicked"
         }
 
         let modifiers = modifierSummary(activity.modifiers)
